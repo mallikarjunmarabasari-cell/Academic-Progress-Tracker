@@ -127,6 +127,8 @@ export default function Login() {
               <div className="mt-2 space-y-1">
                 <p>admin@department.edu / admin123</p>
                 <p>faculty@department.edu / faculty123</p>
+                <p>student@department.edu / student123</p>
+                <p>dean@department.edu / dean123</p>
               </div>
             </div>
           </CardContent>
