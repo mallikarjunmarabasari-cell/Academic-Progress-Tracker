@@ -1,0 +1,405 @@
+ TECH STACK DOCUMENT (TECH_STACK.md)
+
+```markdown
+# Technology Stack Document
+## Academic Event & Progress Management System
+
+### 1. TECHNOLOGY OVERVIEW
+
+This document outlines all technologies, frameworks, libraries, and tools used in the project.
+
+---
+
+### 2. FRONTEND STACK
+
+#### 2.1 Core Framework
+- **React 18.2+** - UI library
+  - Rationale: Component-based architecture, large ecosystem, excellent performance
+  - Hooks for state management
+  - Concurrent rendering features
+
+- **TypeScript 5.0+** - Type-safe JavaScript
+  - Rationale: Catch errors at compile time, better IDE support, improved maintainability
+  - Strict mode enabled
+  - Full type coverage
+
+- **Vite 4.0+** - Build tool
+  - Rationale: Fast HMR, optimized builds, modern ESM support
+  - Development server with instant refresh
+  - Optimized production builds
+
+#### 2.2 UI & Styling
+- **TailwindCSS 3.3+** - Utility-first CSS
+  - Rationale: Rapid development, consistent design, small bundle size
+  - Custom clay theme configuration
+  - JIT compiler for minimal CSS
+
+- **Custom Clay CSS** - Claymorphism components
+  - CSS variables for theming
+  - Custom shadow mixins
+  - Responsive design utilities
+
+- **Framer Motion 10+** - Animation library
+  - Rationale: Smooth animations, gesture support
+  - Used for page transitions and micro-interactions
+
+#### 2.3 Routing & Navigation
+- **React Router 6.14+** - Client-side routing
+  - Nested routes
+  - Protected routes
+  - Lazy loading support
+
+#### 2.4 State Management
+- **React Context API** - Global state
+  - Auth context
+  - Theme context
+  - Event context
+
+- **React Query (TanStack Query) 4.0+** - Server state management
+  - Rationale: Automatic caching, background updates, optimistic UI
+  - Data fetching and caching
+  - Automatic refetching
+  - Optimistic updates
+
+#### 2.5 Forms & Validation
+- **React Hook Form 7.45+** - Form management
+  - Rationale: Performance, minimal re-renders, great UX
+  - Controlled components
+  - Form validation
+
+- **Zod 3.21+** - Schema validation
+  - Rationale: TypeScript-first, runtime validation
+  - Type inference
+  - Custom validators
+
+#### 2.6 HTTP Client
+- **Axios 1.4+** - HTTP requests
+  - Rationale: Interceptors, automatic JSON parsing, request/response transformation
+  - Request/response interceptors
+  - Automatic token refresh
+
+#### 2.7 Charts & Visualization
+- **Recharts 2.7+** - React charts
+  - Rationale: React-native, composable, responsive
+  - Line charts, bar charts, pie charts
+  - Custom styling support
+
+- **date-fns 2.30+** - Date manipulation
+  - Rationale: Modular, immutable, tree-shakable
+  - Date formatting
+  - Date calculations
+
+#### 2.8 Rich Text Editor
+- **Tiptap 2.0+** - Headless editor
+  - Rationale: Extensible, TypeScript support, modern API
+  - Rich text editing
+  - Markdown support
+
+#### 2.9 File Upload
+- **React Dropzone 14.2+** - File upload
+  - Drag & drop support
+  - File type validation
+  - Preview generation
+
+---
+
+### 3. BACKEND STACK
+
+#### 3.1 Runtime & Framework
+- **Node.js 18 LTS** - JavaScript runtime
+  - Rationale: Large ecosystem, non-blocking I/O, JavaScript everywhere
+  - ES modules support
+  - Latest features
+
+- **Express.js 4.18+** - Web framework
+  - Rationale: Minimalist, flexible, battle-tested
+  - Middleware support
+  - RESTful API design
+
+- **TypeScript 5.0+** - Type safety
+  - Strict mode
+  - Path aliases
+  - Decorators support
+
+#### 3.2 Database & ORM
+- **PostgreSQL 15+** - Relational database
+  - Rationale: ACID compliance, advanced features, excellent performance
+  - JSONB support for flexible data
+  - Full-text search
+  - Row-level security
+
+- **Prisma 5.0+** - ORM & database toolkit
+  - Rationale: Type-safe queries, migrations, great DX
+  - Schema-first development
+  - Automatic migrations
+  - Prisma Studio for database GUI
+
+#### 3.3 Authentication & Security
+- **jsonwebtoken 9.0+** - JWT implementation
+  - Access & refresh tokens
+  - Custom claims
+
+- **bcrypt 5.1+** - Password hashing
+  - Rationale: Industry standard, adaptive hashing
+  - 12 rounds (configurable)
+
+- **helmet 7.0+** - Security headers
+  - XSS protection
+  - CSRF protection
+  - Content Security Policy
+
+- **express-rate-limit 6.9+** - Rate limiting
+  - Prevent brute force attacks
+  - API throttling
+
+- **express-validator 7.0+** - Input validation
+  - Request validation
+  - Sanitization
+
+#### 3.4 AI Integration
+- **OpenAI Node SDK 4.0+** - GPT-4 integration
+  - Rationale: Official SDK, TypeScript support, streaming
+  - Chat completions
+  - Function calling
+  - Streaming responses
+
+#### 3.5 File Handling
+- **multer 1.4+** - File upload middleware
+  - Multi-part form data
+  - File filtering
+  - Storage configuration
+
+- **sharp 0.32+** - Image processing
+  - Rationale: Fast, memory-efficient
+  - Image resizing
+  - Format conversion
+
+#### 3.6 Logging & Monitoring
+- **winston 3.10+** - Logging library
+  - Rationale: Multiple transports, levels, formatting
+  - File and console logging
+  - JSON formatting
+  - Log rotation
+
+- **morgan 1.10+** - HTTP request logger
+  - Request logging middleware
+
+#### 3.7 Task Scheduling
+- **node-cron 3.0+** - Cron jobs
+  - Rationale: Simple API, timezone support
+  - Scheduled AI summary generation
+  - Database cleanup
+
+#### 3.8 Email
+- **nodemailer 6.9+** - Email sending
+  - Rationale: Supports all major email services
+  - HTML templates
+  - Attachment support
+
+---
+
+### 4. DEVELOPMENT TOOLS
+
+#### 4.1 Code Quality
+- **ESLint 8.45+** - Linting
+  - TypeScript ESLint parser
+  - Recommended rules
+  - Custom rules for project
+
+- **Prettier 3.0+** - Code formatting
+  - Consistent code style
+  - Auto-formatting on save
+
+- **Husky 8.0+** - Git hooks
+  - Pre-commit hooks
+  - Commit message validation
+
+- **lint-staged 13.2+** - Run linters on staged files
+  - Fast pre-commit checks
+
+#### 4.2 Testing
+- **Jest 29.6+** - Testing framework
+  - Rationale: Zero-config, snapshot testing, coverage
+  - Unit tests
+  - Integration tests
+  - Code coverage
+
+- **React Testing Library 14.0+** - React component testing
+  - Rationale: User-centric testing approach
+  - Component testing
+  - User interaction testing
+
+- **Supertest 6.3+** - API testing
+  - HTTP assertion library
+  - Express integration
+
+- **Playwright 1.36+** - E2E testing
+  - Rationale: Cross-browser, auto-wait, debugging tools
+  - Browser automation
+  - Cross-browser testing
+
+#### 4.3 API Documentation
+- **Swagger/OpenAPI 3.0** - API specification
+  - Interactive API documentation
+  - Auto-generated from code
+
+- **swagger-jsdoc 6.2+** - Generate Swagger from JSDoc
+- **swagger-ui-express 5.0+** - Serve Swagger UI
+
+---
+
+### 5. DEVOPS & INFRASTRUCTURE
+
+#### 5.1 Containerization
+- **Docker 24+** - Containerization
+  - Rationale: Consistent environments, easy deployment
+  - Multi-stage builds
+  - Development and production images
+
+- **Docker Compose** - Multi-container orchestration
+  - Local development environment
+  - Service dependencies
+
+#### 5.2 Environment Management
+- **dotenv 16.3+** - Environment variables
+  - Separate configs for dev/prod
+  - Secret management
+
+#### 5.3 Process Management
+- **PM2 5.3+** - Process manager
+  - Rationale: Auto-restart, load balancing, monitoring
+  - Cluster mode
+  - Log management
+  - Zero-downtime reload
+
+#### 5.4 Reverse Proxy
+- **Nginx** - Web server & reverse proxy
+  - SSL termination
+  - Static file serving
+  - Load balancing
+
+---
+
+### 6. THIRD-PARTY SERVICES
+
+#### 6.1 Required Services
+- **OpenAI API** - AI capabilities
+  - Plan: Pay-as-you-go
+  - Model: GPT-4 Turbo
+
+#### 6.2 Optional Services (Production)
+- **AWS S3** - File storage
+  - Alternative: Local filesystem for development
+
+- **SendGrid** - Email delivery
+  - Alternative: SMTP server
+
+- **Sentry** - Error tracking
+  - Real-time error monitoring
+  - Performance monitoring
+
+- **Google Analytics** - Usage analytics
+  - User behavior tracking
+
+---
+
+### 7. PACKAGE VERSIONS SUMMARY
+
+#### Frontend (package.json)
+```json
+{
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.2",
+    "typescript": "^5.0.2",
+    "@tanstack/react-query": "^4.32.0",
+    "axios": "^1.4.0",
+    "react-hook-form": "^7.45.4",
+    "zod": "^3.21.4",
+    "tailwindcss": "^3.3.3",
+    "framer-motion": "^10.15.0",
+    "recharts": "^2.7.2",
+    "date-fns": "^2.30.0",
+    "@tiptap/react": "^2.0.4",
+    "react-dropzone": "^14.2.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.3",
+    "vite": "^4.4.5",
+    "eslint": "^8.45.0",
+    "prettier": "^3.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "jest": "^29.6.2"
+  }
+}
+Backend (package.json)
+JSON
+
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "typescript": "^5.0.2",
+    "@prisma/client": "^5.2.0",
+    "jsonwebtoken": "^9.0.1",
+    "bcrypt": "^5.1.1",
+    "helmet": "^7.0.0",
+    "express-rate-limit": "^6.9.0",
+    "express-validator": "^7.0.1",
+    "openai": "^4.0.0",
+    "multer": "^1.4.5-lts.1",
+    "sharp": "^0.32.5",
+    "winston": "^3.10.0",
+    "morgan": "^1.10.0",
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.4",
+    "dotenv": "^16.3.1",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "prisma": "^5.2.0",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.4.9",
+    "@types/bcrypt": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.2",
+    "eslint": "^8.45.0",
+    "prettier": "^3.0.0",
+    "jest": "^29.6.2",
+    "supertest": "^6.3.3",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0"
+  }
+}
+8. SYSTEM REQUIREMENTS
+Development Environment
+Node.js: 18.x LTS or higher
+npm: 9.x or higher (or yarn 1.22+)
+PostgreSQL: 15.x or higher
+Docker: 24.x (optional but recommended)
+Git: 2.40+
+Production Environment
+Server: Ubuntu 22.04 LTS or similar
+RAM: 4GB minimum, 8GB recommended
+CPU: 2 cores minimum, 4 cores recommended
+Storage: 50GB SSD minimum
+Node.js: 18.x LTS
+PostgreSQL: 15.x with replication
+Nginx: 1.24+
+9. BROWSER SUPPORT
+Supported Browsers
+Chrome 90+ ✅
+Firefox 88+ ✅
+Safari 14+ ✅
+Edge 90+ ✅
+Not Supported
+Internet Explorer ❌
+Opera Mini ❌
+10. DEVELOPMENT WORKFLOW
+text
+
+1. Code → ESLint/Prettier → Husky pre-commit hook
+2. Commit → Conventional commits → Git
+3. Test → Jest (unit) → Playwright (E2E)
+4. Build → TypeScript compiler → Vite bundler
+5. Deploy → Docker build → Container registry → Production
