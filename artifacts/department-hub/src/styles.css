@@ -1,0 +1,40 @@
+body {
+    font-family: 'Nunito', sans-serif;
+    background: #F7F9FB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.clay-card {
+    background-color: #D0E1F9;
+    border-radius: 20px;
+    padding: 24px;
+    width: 360px;
+    box-shadow: 8px 8px 16px rgba(163, 177, 198, 0.4), -8px -8px 16px rgba(255, 255, 255, 0.8), inset 4px 4px 8px rgba(255, 255, 255, 0.6), inset -4px -4px 8px rgba(163, 177, 198, 0.3);
+}
+
+.clay-btn {
+    background-color: #A8E6CF;
+    border-radius: 16px;
+    border: none;
+    padding: 10px 16px;
+    font-weight: 700;
+    color: #4A4E69;
+    cursor: pointer;
+    box-shadow: 4px 4px 10px rgba(163, 177, 198, 0.5), -4px -4px 10px rgba(255, 255, 255, 0.9), inset 2px 2px 5px rgba(255, 255, 255, 0.5), inset -2px -2px 5px rgba(163, 177, 198, 0.3);
+}
+
+.clay-btn:active {
+    box-shadow: inset 4px 4px 8px rgba(163, 177, 198, 0.5), inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+}
+
+.login-card input {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0 12px 0;
+    border-radius: 10px;
+    border: 1px solid rgba(74, 78, 105, 0.1);
+}
