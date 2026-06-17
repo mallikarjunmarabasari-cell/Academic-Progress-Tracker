@@ -38,3 +38,73 @@ body {
     border-radius: 10px;
     border: 1px solid rgba(74, 78, 105, 0.1);
 }
+
+.app-root {
+    width: 100%;
+    min-height: 100vh;
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card label,
+.login-card h2,
+.login-error,
+.dashboard-role,
+.loading-screen,
+.logout-button {
+    color: #4A4E69;
+}
+
+.login-error {
+    color: #b00020;
+    margin-bottom: 12px;
+}
+
+.dashboard-root {
+    width: 100%;
+    max-width: 1080px;
+}
+
+.dashboard-card {
+    width: 100%;
+    max-width: 900px;
+}
+
+.dashboard-role {
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.dashboard-grid {
+    display: grid;
+    gap: 16px;
+    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.dashboard-tile {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 6px 6px 16px rgba(163, 177, 198, 0.18), -6px -6px 16px rgba(255, 255, 255, 0.9);
+}
+
+.loading-screen {
+    color: #4A4E69;
+    font-size: 18px;
+}
+
+.logout-button {
+    align-self: flex-end;
+    margin-bottom: 16px;
+    border: none;
+    background-color: #e9c46a;
+    color: #4A4E69;
+    padding: 10px 16px;
+    border-radius: 16px;
+    cursor: pointer;
+}
