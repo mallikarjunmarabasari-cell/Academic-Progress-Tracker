@@ -1,7 +1,8 @@
 import React from "react";
 import "./styles.css";
+import Events from "./Events";
 
-export default function Dashboard({ user }) {
+export default function Dashboard({ user, token }) {
   return (
     <div className="dashboard-root">
       <div className="clay-card dashboard-card">
@@ -10,7 +11,7 @@ export default function Dashboard({ user }) {
         <div className="dashboard-grid">
           <div className="dashboard-tile">
             <h2>Weekly Events</h2>
-            <p>Track seminars, hackathons, and deadlines.</p>
+            <Events token={token} />
           </div>
           <div className="dashboard-tile">
             <h2>Progress Metrics</h2>

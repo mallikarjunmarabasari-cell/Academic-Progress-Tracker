@@ -58,7 +58,7 @@ function App() {
           <button className="logout-button" onClick={handleLogout}>
             Log out
           </button>
-          <Dashboard user={user} />
+          <Dashboard user={user} token={token} />
         </>
       ) : (
         <Login onLoginSuccess={handleLoginSuccess} />
