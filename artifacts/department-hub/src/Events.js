@@ -26,7 +26,7 @@ export default function Events({ token }) {
   }
 
   function submit(e) {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     setError("");
     fetch("http://localhost:4000/api/events", {
       method: "POST",
@@ -50,13 +50,13 @@ export default function Events({ token }) {
 
   return (
     <div className="events">
-      <h3>Events</h3>
+      <h3>Events (live)</h3>
       {error && <div className="error">{error}</div>}
       <ul>
         {events.map((ev) => (
           <li key={ev.id} className="event-item">
-            <strong>{ev.title}</strong> — {ev.date} ({ev.department}) —{" "}
-            {ev.attendance} attendees
+            <strong>{ev.title}</strong>
+            <span> — {ev.date} ({ev.department}) — {ev.attendance} attendees</span>
           </li>
         ))}
       </ul>
@@ -78,11 +78,14 @@ export default function Events({ token }) {
           onChange={(e) => setForm({ ...form, department: e.target.value })}
         />
         <input
+          type="number"
           placeholder="Attendance"
           value={form.attendance}
           onChange={(e) => setForm({ ...form, attendance: e.target.value })}
         />
-        <button type="submit">Add Event</button>
+        <button id="add-event-button" type="submit" onClick={submit}>
+          Add Event
+        </button>
       </form>
     </div>
   );
