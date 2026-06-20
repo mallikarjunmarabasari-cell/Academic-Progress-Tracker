@@ -56,7 +56,10 @@ export default function Events({ token }) {
         {events.map((ev) => (
           <li key={ev.id} className="event-item">
             <strong>{ev.title}</strong>
-            <span> — {ev.date} ({ev.department}) — {ev.attendance} attendees</span>
+            <span>
+              {" "}
+              — {ev.date} ({ev.department}) — {ev.attendance} attendees
+            </span>
           </li>
         ))}
       </ul>
