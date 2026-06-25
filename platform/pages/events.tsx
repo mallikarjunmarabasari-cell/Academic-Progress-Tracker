@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useAuth } from '@/context/AuthContext'
 
 type EventItem = {
   id: string
@@ -21,10 +23,17 @@ type EventForm = {
 }
 
 export default function EventsPage() {
+  const router = useRouter()
+  const { user, signOut } = useAuth()
   const [events, setEvents] = useState<EventItem[]>([])
   const [form, setForm] = useState<EventForm>({ title: '', description: '', startTime: '' })
   const [isSaving, setIsSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  const handleLogout = async () => {
+    await signOut()
+    router.push('/login')
+  }
 
   useEffect(() => {
     fetch('/api/events')
@@ -66,9 +75,20 @@ export default function EventsPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="mx-auto max-w-4xl space-y-8">
-        <section className="card p-8">
-          <h1 className="text-3xl font-semibold text-slate-900">Events</h1>
-          <p className="mt-2 text-slate-600">Create and review upcoming events for your department.</p>
+        <section className="card p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-semibold text-slate-900">Events</h1>
+            <p className="mt-2 text-slate-600">Create and review upcoming events for your department.</p>
+          </div>
+          <div className="flex flex-col gap-2 text-right">
+            <p className="text-sm text-slate-600">Logged in as <span className="font-semibold">{user?.email}</span></p>
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center justify-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700"
+            >
+              Sign Out
+            </button>
+          </div>
         </section>
 
         <section className="card p-8 space-y-6">
