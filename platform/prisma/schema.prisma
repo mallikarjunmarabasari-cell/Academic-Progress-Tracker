@@ -8,12 +8,13 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String?
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
-  events    Event[]
+  id               String           @id @default(uuid())
+  email            String           @unique
+  name             String?
+  role             Role             @default(USER)
+  createdAt        DateTime         @default(now())
+  events           Event[]
+  progressEntries  ProgressEntry[]
 }
 
 model Event {
@@ -23,6 +24,17 @@ model Event {
   startTime   DateTime
   createdAt   DateTime @default(now())
   createdBy   User?    @relation(fields: [createdById], references: [id])
+  createdById String?
+}
+
+model ProgressEntry {
+  id          String    @id @default(uuid())
+  title       String
+  status      String    @default("planned")
+  notes       String?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  createdBy   User?     @relation(fields: [createdById], references: [id])
   createdById String?
 }
 
