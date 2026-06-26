@@ -27,6 +27,9 @@ export default function Home() {
                 <Link href="/events" className="inline-flex items-center justify-center rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
                   Open Events dashboard
                 </Link>
+                <Link href="/progress" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
+                  Open Progress tracker
+                </Link>
                 <Link href="/api/events" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
                   View Events API
                 </Link>
@@ -40,7 +43,7 @@ export default function Home() {
         </section>
 
         <section className="card p-8">
-          <h2 className="text-2xl font-semibold text-slate-900">What's next</h2>
+          <h2 className="text-2xl font-semibold text-slate-900">What&apos;s next</h2>
           <p className="mt-3 text-slate-600">
             {session 
               ? 'The Events page is now connected to the API and Supabase PostgreSQL. Next we can add Progress tracking and AI Summary features.'
