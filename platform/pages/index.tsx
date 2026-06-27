@@ -1,8 +1,70 @@
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
+
+type ProgressEntry = {
+  id: string
+  title: string
+  status: string
+  notes?: string | null
+}
 
 export default function Home() {
   const { session, loading } = useAuth()
+  const [summary, setSummary] = useState<string | null>(null)
+  const [summaryError, setSummaryError] = useState<string | null>(null)
+  const [isSummarizing, setIsSummarizing] = useState(false)
+  const [hasProgressItems, setHasProgressItems] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    if (!session) return
+
+    fetch('/api/progress')
+      .then((res) => res.json())
+      .then((entries: ProgressEntry[]) => setHasProgressItems(entries.length > 0))
+      .catch(() => setHasProgressItems(false))
+  }, [session])
+
+  const handleGenerateSummary = async () => {
+    if (!session) {
+      setSummaryError('Sign in first to generate an AI summary.')
+      return
+    }
+
+    setSummaryError(null)
+    setIsSummarizing(true)
+
+    const entriesResponse = await fetch('/api/progress')
+    if (!entriesResponse.ok) {
+      setIsSummarizing(false)
+      setSummaryError('Unable to load progress items for summary.')
+      return
+    }
+
+    const entries: ProgressEntry[] = await entriesResponse.json()
+    if (entries.length === 0) {
+      setIsSummarizing(false)
+      setSummaryError('Add progress items on the tracker before generating a summary.')
+      return
+    }
+
+    const summaryResponse = await fetch('/api/progress/summary', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ entries: entries.map((entry) => ({ title: entry.title, status: entry.status, notes: entry.notes })) }),
+    })
+
+    setIsSummarizing(false)
+
+    if (!summaryResponse.ok) {
+      const body = await summaryResponse.json().catch(() => null)
+      setSummaryError(body?.error || 'Unable to generate summary.')
+      return
+    }
+
+    const body = await summaryResponse.json()
+    setSummary(body.summary)
+  }
 
   if (loading) {
     return (
@@ -41,6 +103,41 @@ export default function Home() {
             )}
           </div>
         </section>
+
+        {session ? (
+          <section className="card p-8">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h2 className="text-2xl font-semibold text-slate-900">AI Summary for progress</h2>
+                <p className="mt-2 text-slate-600">
+                  Generate a concise summary of the latest progress tracker items using OpenAI or the built-in fallback summary.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleGenerateSummary}
+                disabled={isSummarizing}
+                className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-emerald-300"
+              >
+                {isSummarizing ? 'Generating summary...' : 'Generate AI summary'}
+              </button>
+            </div>
+
+            {summaryError ? (
+              <div className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{summaryError}</div>
+            ) : null}
+
+            {summary ? (
+              <div className="mt-6 rounded-3xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-800 whitespace-pre-line">
+                {summary}
+              </div>
+            ) : null}
+
+            {hasProgressItems === false ? (
+              <p className="mt-6 text-sm text-slate-600">No progress entries exist yet. Add items on the tracker to generate a summary.</p>
+            ) : null}
+          </section>
+        ) : null}
 
         <section className="card p-8">
           <h2 className="text-2xl font-semibold text-slate-900">What&apos;s next</h2>
