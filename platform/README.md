@@ -1,6 +1,6 @@
-# Dept Intelligence — Platform (scaffold)
+# AI-Powered Department Performance & Accreditation Intelligence System (ADPAIS)
 
-This folder contains a minimal Next.js + TypeScript + Tailwind scaffold for the Dept Intelligence platform. Run:
+This folder contains a minimal Next.js + TypeScript + Tailwind scaffold for the ADPAIS academic intelligence platform. Run:
 
 ```bash
 cd platform

@@ -53,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           messages: [
             {
               role: 'system',
-              content: 'You summarize academic progress tracker items into a short, useful executive summary.',
+              content: 'You summarize department performance items into a short, useful executive summary for ADPAIS.',
             },
             {
               role: 'user',

@@ -151,7 +151,7 @@ export default function DashboardPage() {
                 Open Progress tracker
               </Link>
               <Link href="/events" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
-                Open Events dashboard
+                View Events API
               </Link>
             </div>
           </div>

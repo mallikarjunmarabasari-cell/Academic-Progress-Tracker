@@ -16,7 +16,7 @@ export default function LoginPage() {
     // Check if user is already logged in
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
-        router.push('/events');
+        router.push('/dashboard');
       }
     });
 
@@ -25,7 +25,7 @@ export default function LoginPage() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
-        router.push('/events');
+        router.push('/dashboard');
       }
     });
 
@@ -40,8 +40,8 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-white mb-2">Dept Intelligence</h1>
-          <p className="text-slate-400">Academic Progress Tracker</p>
+          <h1 className="text-4xl font-bold text-white mb-2">ADPAIS</h1>
+          <p className="text-slate-400">AI-Powered Department Performance & Accreditation Intelligence System</p>
         </div>
 
         <div className="bg-slate-800 border border-slate-700 rounded-lg p-8 shadow-2xl">
