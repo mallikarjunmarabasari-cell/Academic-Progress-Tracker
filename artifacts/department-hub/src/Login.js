@@ -29,7 +29,7 @@ export default function Login({ onLoginSuccess }) {
 
   return (
     <div className="clay-card login-card">
-      <h2>DeptSync Login</h2>
+      <h2>ADPAIS Login</h2>
       <form onSubmit={handleLogin}>
         <label>Email</label>
         <input value={email} onChange={(e) => setEmail(e.target.value)} />
