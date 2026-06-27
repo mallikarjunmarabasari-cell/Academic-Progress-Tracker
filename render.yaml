@@ -1,0 +1,20 @@
+services:
+  - type: web_service
+    name: academic-progress-backend
+    env: node
+    plan: starter
+    repo: https://github.com/<your-org>/<your-repo>
+    branch: main
+    buildCommand: pnpm install
+    startCommand: pnpm --filter ./artifacts/api-server run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromService:
+          name: supabase-db
+          key: DATABASE_URL
+      - key: OPENAI_API_KEY
+        fromService:
+          name: openai-key
+          key: OPENAI_API_KEY
