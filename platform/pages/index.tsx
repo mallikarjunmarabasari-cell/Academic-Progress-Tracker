@@ -92,6 +92,9 @@ export default function Home() {
                 <Link href="/progress" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
                   Open Progress tracker
                 </Link>
+                <Link href="/dashboard" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
+                  Open Dashboard
+                </Link>
                 <Link href="/api/events" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
                   View Events API
                 </Link>
