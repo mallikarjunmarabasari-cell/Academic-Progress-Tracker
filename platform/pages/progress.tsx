@@ -26,6 +26,8 @@ export default function ProgressPage() {
   const [notes, setNotes] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [isSaving, setIsSaving] = useState(false)
+  const [summary, setSummary] = useState<string | null>(null)
+  const [isSummarizing, setIsSummarizing] = useState(false)
 
   useEffect(() => {
     fetch('/api/progress')
@@ -69,6 +71,33 @@ export default function ProgressPage() {
     setTitle('')
     setStatus('planned')
     setNotes('')
+  }
+
+  async function handleGenerateSummary() {
+    if (entries.length === 0) {
+      setError('Add at least one progress item before generating a summary.')
+      return
+    }
+
+    setIsSummarizing(true)
+    setError(null)
+
+    const response = await fetch('/api/progress/summary', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ entries: entries.map((entry) => ({ title: entry.title, status: entry.status, notes: entry.notes })) }),
+    })
+
+    setIsSummarizing(false)
+
+    if (!response.ok) {
+      const body = await response.json().catch(() => null)
+      setError(body?.error || 'Unable to generate summary.')
+      return
+    }
+
+    const body = await response.json()
+    setSummary(body.summary)
   }
 
   return (
@@ -122,7 +151,26 @@ export default function ProgressPage() {
         </section>
 
         <section className="card p-8">
-          <h2 className="text-xl font-semibold text-slate-900">Recent progress items</h2>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-xl font-semibold text-slate-900">Recent progress items</h2>
+              <p className="mt-1 text-slate-600">Use AI to summarize the latest status in one shot.</p>
+            </div>
+            <button
+              onClick={handleGenerateSummary}
+              disabled={isSummarizing || entries.length === 0}
+              className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-emerald-300"
+            >
+              {isSummarizing ? 'Summarizing...' : 'Generate AI Summary'}
+            </button>
+          </div>
+
+          {summary ? (
+            <div className="mt-6 rounded-3xl border border-emerald-200 bg-emerald-50 p-5 text-sm text-emerald-800 whitespace-pre-line">
+              {summary}
+            </div>
+          ) : null}
+
           <div className="mt-6 space-y-4">
             {entries.length === 0 ? (
               <div className="rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-slate-600">No progress items yet. Add the first milestone.</div>
