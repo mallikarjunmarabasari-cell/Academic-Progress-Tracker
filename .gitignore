@@ -9,3 +9,6 @@ coverage/
 .vscode/
 .idea/
 ./local
+# Ignore generated frontend/server builds (ADPAIS project)
+platform/.next/
+artifacts/*/build/
