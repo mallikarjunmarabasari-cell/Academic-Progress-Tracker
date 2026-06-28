@@ -80,3 +80,7 @@ For reviewer impact, present ADPAIS as an academic intelligence system that:
 - measures department health and risk,
 - generates executive AI summaries,
 - and supports strategic decision-making across students, faculty, and management.
+
+## Changelog (short)
+
+- 2026-06-28: Rebranded to ADPAIS; added CI and deployment docs; cleaned legacy assets.
