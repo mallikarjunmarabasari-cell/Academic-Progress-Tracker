@@ -45,3 +45,9 @@ Render can deploy it separately as a Node web service.
 - Set any required environment variables on Render (e.g. `NODE_ENV=production`).
 
 A sample Render service definition has been added at the repository root in `render.yaml`.
+
+#### Quick Render Checklist
+
+- Create a new Web Service on Render using the `artifacts/api-server` folder as the root.
+- Set `NODE_ENV=production`, `DATABASE_URL`, and `OPENAI_API_KEY` in Render's environment.
+- Use the health check endpoint `/health` after deployment to confirm service readiness.
