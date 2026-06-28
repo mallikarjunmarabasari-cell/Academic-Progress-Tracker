@@ -1,0 +1,10 @@
+Local CI commands for ADPAIS contributors
+
+Install deps:
+pnpm install
+
+Run build:
+pnpm build
+
+Run platform dev server:
+cd platform && pnpm dev
