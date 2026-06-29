@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 type Analytics = {
@@ -19,14 +20,17 @@ function KPI({ title, value }: { title: string; value: React.ReactNode }) {
   )
 }
 
-function ActionCard({ title, description, actionLabel }: { title: string; description: string; actionLabel: string }) {
+function ActionCard({ title, description, actionLabel, href }: { title: string; description: string; actionLabel: string; href: string }) {
   return (
     <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
       <p className="text-sm font-semibold text-slate-900">{title}</p>
       <p className="mt-2 text-sm text-slate-600">{description}</p>
-      <button className="mt-4 inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">
+      <Link
+        href={href}
+        className="mt-4 inline-flex items-center justify-center rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
+      >
         {actionLabel}
-      </button>
+      </Link>
     </div>
   )
 }
@@ -52,11 +56,13 @@ export default function RoleDashboard({ role, analytics }: Props) {
             title="Next assignment"
             description="Complete your next planned progress item to stay on schedule."
             actionLabel="View tasks"
+            href="/progress"
           />
           <ActionCard
             title="Request review"
             description="Ask faculty for feedback on your latest submission."
             actionLabel="Send request"
+            href="/events"
           />
         </div>
       </section>
@@ -74,11 +80,13 @@ export default function RoleDashboard({ role, analytics }: Props) {
             title="Review queue"
             description="Access submissions awaiting faculty review and approvals."
             actionLabel="Review now"
+            href="/events"
           />
           <ActionCard
             title="Student outreach"
             description="Message students with overdue or high-priority progress items."
             actionLabel="Send note"
+            href="/dashboard"
           />
         </div>
       </section>
@@ -96,11 +104,13 @@ export default function RoleDashboard({ role, analytics }: Props) {
             title="Approval pipeline"
             description="Monitor pending reviewer approvals across faculty and teams."
             actionLabel="Open pipeline"
+            href="/dashboard"
           />
           <ActionCard
             title="Export evidence bundle"
             description="Build an evidence package for accreditation review or audit submission."
             actionLabel="Export bundle"
+            href="/progress"
           />
         </div>
       </section>
@@ -124,11 +134,13 @@ export default function RoleDashboard({ role, analytics }: Props) {
           title="Export accreditation package"
           description="Generate the latest accreditation evidence package for review and management."
           actionLabel="Export package"
+          href="/progress"
         />
         <ActionCard
           title="View departmental health"
           description="Inspect risk signals, leaderboards, and strategic focus areas."
           actionLabel="View analytics"
+          href="/dashboard"
         />
       </div>
     </section>
