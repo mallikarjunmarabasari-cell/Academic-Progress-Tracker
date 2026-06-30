@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAuth } from '@/context/AuthContext'
+import RolePageHeader from '@/components/RolePageHeader'
 
 type ProgressEntry = {
   id: string
@@ -103,15 +104,19 @@ export default function ProgressPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="mx-auto max-w-5xl space-y-8">
+        <RolePageHeader
+          title="Progress Tracker"
+          subtitle="Track milestones, follow-up items, and study progress for your department."
+          backHref="/role-dashboard"
+          backLabel="Back to role dashboard"
+          actions={[{ href: '/dashboard', label: 'Open dashboard', variant: 'ghost' }]}
+        />
+
         <section className="card p-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-3xl font-semibold text-slate-900">Progress Tracker</h1>
-            <p className="mt-2 text-slate-600">Track milestones, follow-up items, and study progress for your department.</p>
-          </div>
-          <div className="flex flex-col gap-2 text-right">
             <p className="text-sm text-slate-600">Logged in as <span className="font-semibold">{user?.email}</span></p>
-            <button onClick={handleLogout} className="inline-flex items-center justify-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700">Sign Out</button>
           </div>
+          <button onClick={handleLogout} className="inline-flex items-center justify-center rounded-full bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-700">Sign Out</button>
         </section>
 
         <section className="card p-8 space-y-6">
