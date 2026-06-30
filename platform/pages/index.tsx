@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 
@@ -10,11 +11,17 @@ type ProgressEntry = {
 }
 
 export default function Home() {
+  const router = useRouter()
+  const { role } = router.query as { role?: string }
   const { session, loading } = useAuth()
   const [summary, setSummary] = useState<string | null>(null)
   const [summaryError, setSummaryError] = useState<string | null>(null)
   const [isSummarizing, setIsSummarizing] = useState(false)
   const [hasProgressItems, setHasProgressItems] = useState<boolean | null>(null)
+
+  const preserveRoleHref = (path: string) => {
+    return role ? `${path}?role=${encodeURIComponent(role)}` : path
+  }
 
   useEffect(() => {
     if (!session) return
@@ -86,13 +93,13 @@ export default function Home() {
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
             {session ? (
               <>
-                <Link href="/dashboard" className="inline-flex items-center justify-center rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
+                <Link href={preserveRoleHref('/dashboard')} className="inline-flex items-center justify-center rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
                   Open Intelligence Dashboard
                 </Link>
-                <Link href="/progress" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
+                <Link href={preserveRoleHref('/progress')} className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
                   Open Progress tracker
                 </Link>
-                <Link href="/events" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
+                <Link href={preserveRoleHref('/events')} className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
                   Open Events page
                 </Link>
                 <Link href="/api/events" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400">

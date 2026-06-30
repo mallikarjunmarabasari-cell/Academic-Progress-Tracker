@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 
@@ -23,12 +24,18 @@ type SummaryHistoryItem = {
 }
 
 export default function DashboardPage() {
+  const router = useRouter()
+  const { role } = router.query as { role?: string }
   const { session, loading } = useAuth()
   const [entries, setEntries] = useState<ProgressEntry[]>([])
   const [isLoadingEntries, setIsLoadingEntries] = useState(true)
   const [summaryHistory, setSummaryHistory] = useState<SummaryHistoryItem[]>([])
   const [isSummarizing, setIsSummarizing] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  const preserveRoleHref = (path: string) => {
+    return role ? `${path}?role=${encodeURIComponent(role)}` : path
+  }
 
   useEffect(() => {
     if (!session) {
@@ -147,10 +154,10 @@ export default function DashboardPage() {
               <p className="mt-2 text-slate-600">View progress analytics, generate AI summaries, and keep a history of your generated reports.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link href="/progress" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
+              <Link href={preserveRoleHref('/progress')} className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
                 Open Progress tracker
               </Link>
-              <Link href="/events" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
+              <Link href={preserveRoleHref('/events')} className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-900 transition hover:border-slate-400">
                 View Events API
               </Link>
             </div>
