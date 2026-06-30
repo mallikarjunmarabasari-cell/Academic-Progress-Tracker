@@ -1,11 +1,16 @@
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
 
 export default function RequestReviewPage() {
+  const router = useRouter()
   const { loading } = useAuth()
   const [message, setMessage] = useState('')
   const [status, setStatus] = useState<string | null>(null)
+
+  const role = router.query.role as string | undefined
+  const backHref = role ? `/role-dashboard?role=${encodeURIComponent(role)}` : '/role-dashboard'
 
   if (loading) return <div className="p-8">Loading...</div>
 
@@ -24,8 +29,8 @@ export default function RequestReviewPage() {
               <h1 className="text-3xl font-semibold text-slate-900">Request Review</h1>
               <p className="mt-2 text-slate-600">Submit a request for faculty feedback on your progress entry or milestone.</p>
             </div>
-            <Link href="/dashboard" className="text-sm text-slate-600 hover:underline">
-              Back to dashboard
+            <Link href={backHref} className="text-sm text-slate-600 hover:underline">
+              Back to role dashboard
             </Link>
           </div>
 

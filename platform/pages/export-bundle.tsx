@@ -1,13 +1,18 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 
 export default function ExportBundlePage() {
+  const router = useRouter()
   const { loading } = useAuth()
   const [exporting, setExporting] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
 
   if (loading) return <div className="p-8">Loading...</div>
+
+  const role = router.query.role as string | undefined
+  const backHref = role ? `/role-dashboard?role=${encodeURIComponent(role)}` : '/role-dashboard'
 
   const handleExport = async () => {
     setExporting(true)
@@ -26,8 +31,8 @@ export default function ExportBundlePage() {
               <h1 className="text-3xl font-semibold text-slate-900">Export Accreditation Bundle</h1>
               <p className="mt-2 text-slate-600">Generate a compressed package of progress records and evidence for review.</p>
             </div>
-            <Link href="/dashboard" className="text-sm text-slate-600 hover:underline">
-              Back to dashboard
+            <Link href={backHref} className="text-sm text-slate-600 hover:underline">
+              Back to role dashboard
             </Link>
           </div>
 

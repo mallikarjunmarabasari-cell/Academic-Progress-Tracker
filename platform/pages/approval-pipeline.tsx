@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useAuth } from '@/context/AuthContext'
 
 type ProgressEntry = {
@@ -10,6 +11,7 @@ type ProgressEntry = {
 }
 
 export default function ApprovalPipelinePage() {
+  const router = useRouter()
   const { session, loading } = useAuth()
   const [items, setItems] = useState<ProgressEntry[]>([])
   const [error, setError] = useState<string | null>(null)
@@ -24,6 +26,9 @@ export default function ApprovalPipelinePage() {
 
   if (loading) return <div className="p-8">Loading...</div>
 
+  const role = router.query.role as string | undefined
+  const backHref = role ? `/role-dashboard?role=${encodeURIComponent(role)}` : '/role-dashboard'
+
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="mx-auto max-w-5xl space-y-8">
@@ -33,8 +38,8 @@ export default function ApprovalPipelinePage() {
               <h1 className="text-3xl font-semibold text-slate-900">Approval Pipeline</h1>
               <p className="mt-2 text-slate-600">Review the workflow pipeline and approve the next steps for department progress items.</p>
             </div>
-            <Link href="/dashboard" className="text-sm text-slate-600 hover:underline">
-              Back to dashboard
+            <Link href={backHref} className="text-sm text-slate-600 hover:underline">
+              Back to role dashboard
             </Link>
           </div>
 

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 
@@ -9,6 +10,7 @@ type ProgressEntry = {
 }
 
 export default function HealthOverviewPage() {
+  const router = useRouter()
   const { session, loading } = useAuth()
   const [items, setItems] = useState<ProgressEntry[]>([])
   const [error, setError] = useState<string | null>(null)
@@ -33,6 +35,9 @@ export default function HealthOverviewPage() {
 
   if (loading) return <div className="p-8">Loading...</div>
 
+  const role = router.query.role as string | undefined
+  const backHref = role ? `/role-dashboard?role=${encodeURIComponent(role)}` : '/role-dashboard'
+
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="mx-auto max-w-5xl space-y-8">
@@ -42,8 +47,8 @@ export default function HealthOverviewPage() {
               <h1 className="text-3xl font-semibold text-slate-900">Department Health Overview</h1>
               <p className="mt-2 text-slate-600">Track completion, in-progress items, and accreditation readiness at a glance.</p>
             </div>
-            <Link href="/dashboard" className="text-sm text-slate-600 hover:underline">
-              Back to dashboard
+            <Link href={backHref} className="text-sm text-slate-600 hover:underline">
+              Back to role dashboard
             </Link>
           </div>
 

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useAuth } from '@/context/AuthContext'
 
 type ProgressEntry = {
@@ -12,6 +13,7 @@ type ProgressEntry = {
 }
 
 export default function ReviewQueuePage() {
+  const router = useRouter()
   const { session, loading } = useAuth()
   const [entries, setEntries] = useState<ProgressEntry[]>([])
   const [error, setError] = useState<string | null>(null)
@@ -26,6 +28,9 @@ export default function ReviewQueuePage() {
 
   if (loading) return <div className="p-8">Loading...</div>
 
+  const role = router.query.role as string | undefined
+  const backHref = role ? `/role-dashboard?role=${encodeURIComponent(role)}` : '/role-dashboard'
+
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="mx-auto max-w-5xl space-y-8">
@@ -35,8 +40,8 @@ export default function ReviewQueuePage() {
               <h1 className="text-3xl font-semibold text-slate-900">Review Queue</h1>
               <p className="mt-2 text-slate-600">Review progress entries that are still active and need your approval.</p>
             </div>
-            <Link href="/dashboard" className="text-sm text-slate-600 hover:underline">
-              Back to dashboard
+            <Link href={backHref} className="text-sm text-slate-600 hover:underline">
+              Back to role dashboard
             </Link>
           </div>
 

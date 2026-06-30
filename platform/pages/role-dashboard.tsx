@@ -46,7 +46,7 @@ export default function Page() {
     if (!entries || !entries.length) return []
 
     if (r === 'Student') {
-      const me = session?.user?.id || session?.user?.sub || null
+      const me = session?.user?.id ?? null
       return entries.filter((e) => e.createdBy?.id === me)
     }
 

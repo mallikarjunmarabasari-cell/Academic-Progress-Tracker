@@ -36,6 +36,11 @@ function ActionCard({ title, description, actionLabel, href }: { title: string; 
 }
 
 export default function RoleDashboard({ role, analytics }: Props) {
+  const preserveRoleHref = (href: string) => {
+    if (!role) return href
+    return `${href}?role=${encodeURIComponent(role)}`
+  }
+
   const common = (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       <KPI title="Total Entries" value={analytics.total ?? 0} />
@@ -56,13 +61,13 @@ export default function RoleDashboard({ role, analytics }: Props) {
             title="Next assignment"
             description="Complete your next planned progress item to stay on schedule."
             actionLabel="View tasks"
-            href="/progress"
+            href={preserveRoleHref('/progress')}
           />
           <ActionCard
             title="Request review"
             description="Ask faculty for feedback on your latest submission."
             actionLabel="Send request"
-            href="/request-review"
+            href={preserveRoleHref('/request-review')}
           />
         </div>
       </section>
@@ -80,13 +85,13 @@ export default function RoleDashboard({ role, analytics }: Props) {
             title="Review queue"
             description="Access submissions awaiting faculty review and approvals."
             actionLabel="Review now"
-            href="/review-queue"
+            href={preserveRoleHref('/review-queue')}
           />
           <ActionCard
             title="Student outreach"
             description="Message students with overdue or high-priority progress items."
             actionLabel="Send note"
-            href="/approval-pipeline"
+            href={preserveRoleHref('/approval-pipeline')}
           />
         </div>
       </section>
@@ -104,13 +109,13 @@ export default function RoleDashboard({ role, analytics }: Props) {
             title="Approval pipeline"
             description="Monitor pending reviewer approvals across faculty and teams."
             actionLabel="Open pipeline"
-            href="/approval-pipeline"
+            href={preserveRoleHref('/approval-pipeline')}
           />
           <ActionCard
             title="Export evidence bundle"
             description="Build an evidence package for accreditation review or audit submission."
             actionLabel="Export bundle"
-            href="/export-bundle"
+            href={preserveRoleHref('/export-bundle')}
           />
         </div>
       </section>
@@ -134,13 +139,13 @@ export default function RoleDashboard({ role, analytics }: Props) {
           title="Export accreditation package"
           description="Generate the latest accreditation evidence package for review and management."
           actionLabel="Export package"
-          href="/export-bundle"
+          href={preserveRoleHref('/export-bundle')}
         />
         <ActionCard
           title="View departmental health"
           description="Inspect risk signals, leaderboards, and strategic focus areas."
           actionLabel="View analytics"
-          href="/health-overview"
+          href={preserveRoleHref('/health-overview')}
         />
       </div>
     </section>
