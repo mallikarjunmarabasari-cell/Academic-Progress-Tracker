@@ -62,7 +62,7 @@ export default function RoleDashboard({ role, analytics }: Props) {
             title="Request review"
             description="Ask faculty for feedback on your latest submission."
             actionLabel="Send request"
-            href="/events"
+            href="/request-review"
           />
         </div>
       </section>
@@ -80,13 +80,13 @@ export default function RoleDashboard({ role, analytics }: Props) {
             title="Review queue"
             description="Access submissions awaiting faculty review and approvals."
             actionLabel="Review now"
-            href="/events"
+            href="/review-queue"
           />
           <ActionCard
             title="Student outreach"
             description="Message students with overdue or high-priority progress items."
             actionLabel="Send note"
-            href="/dashboard"
+            href="/approval-pipeline"
           />
         </div>
       </section>
@@ -104,13 +104,13 @@ export default function RoleDashboard({ role, analytics }: Props) {
             title="Approval pipeline"
             description="Monitor pending reviewer approvals across faculty and teams."
             actionLabel="Open pipeline"
-            href="/dashboard"
+            href="/approval-pipeline"
           />
           <ActionCard
             title="Export evidence bundle"
             description="Build an evidence package for accreditation review or audit submission."
             actionLabel="Export bundle"
-            href="/progress"
+            href="/export-bundle"
           />
         </div>
       </section>
@@ -134,13 +134,13 @@ export default function RoleDashboard({ role, analytics }: Props) {
           title="Export accreditation package"
           description="Generate the latest accreditation evidence package for review and management."
           actionLabel="Export package"
-          href="/progress"
+          href="/export-bundle"
         />
         <ActionCard
           title="View departmental health"
           description="Inspect risk signals, leaderboards, and strategic focus areas."
           actionLabel="View analytics"
-          href="/dashboard"
+          href="/health-overview"
         />
       </div>
     </section>
