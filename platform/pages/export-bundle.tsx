@@ -1,18 +1,13 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
+import RolePageHeader from '@/components/RolePageHeader'
 
 export default function ExportBundlePage() {
-  const router = useRouter()
   const { loading } = useAuth()
   const [exporting, setExporting] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
 
   if (loading) return <div className="p-8">Loading...</div>
-
-  const role = router.query.role as string | undefined
-  const backHref = role ? `/role-dashboard?role=${encodeURIComponent(role)}` : '/role-dashboard'
 
   const handleExport = async () => {
     setExporting(true)
@@ -25,17 +20,14 @@ export default function ExportBundlePage() {
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="mx-auto max-w-4xl space-y-8">
-        <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h1 className="text-3xl font-semibold text-slate-900">Export Accreditation Bundle</h1>
-              <p className="mt-2 text-slate-600">Generate a compressed package of progress records and evidence for review.</p>
-            </div>
-            <Link href={backHref} className="text-sm text-slate-600 hover:underline">
-              Back to role dashboard
-            </Link>
-          </div>
+        <RolePageHeader
+          title="Export Accreditation Bundle"
+          subtitle="Generate a compressed package of progress records and evidence for review."
+          backHref="/role-dashboard"
+          backLabel="Back to role dashboard"
+        />
 
+        <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <div className="mt-6 rounded-3xl border border-slate-200 bg-slate-50 p-6">
             <p className="text-sm text-slate-600">This tool prepares a bundle of document summaries, progress entries, and accreditation notes.</p>
             <button

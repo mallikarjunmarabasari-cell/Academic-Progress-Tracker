@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAuth } from '@/context/AuthContext'
+import RolePageHeader from '@/components/RolePageHeader'
 
 type ProgressEntry = {
   id: string
@@ -26,23 +26,17 @@ export default function ApprovalPipelinePage() {
 
   if (loading) return <div className="p-8">Loading...</div>
 
-  const role = router.query.role as string | undefined
-  const backHref = role ? `/role-dashboard?role=${encodeURIComponent(role)}` : '/role-dashboard'
-
   return (
     <main className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="mx-auto max-w-5xl space-y-8">
-        <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h1 className="text-3xl font-semibold text-slate-900">Approval Pipeline</h1>
-              <p className="mt-2 text-slate-600">Review the workflow pipeline and approve the next steps for department progress items.</p>
-            </div>
-            <Link href={backHref} className="text-sm text-slate-600 hover:underline">
-              Back to role dashboard
-            </Link>
-          </div>
+        <RolePageHeader
+          title="Approval Pipeline"
+          subtitle="Review the workflow pipeline and approve the next steps for department progress items."
+          backHref="/role-dashboard"
+          backLabel="Back to role dashboard"
+        />
 
+        <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           {error ? <div className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div> : null}
 
           <div className="mt-6 space-y-4">
