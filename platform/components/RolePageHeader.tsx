@@ -27,10 +27,11 @@ export default function RolePageHeader({
 }: Props) {
   const router = useRouter()
   const role = router.query.role as string | undefined
+  const effectiveRole = role || 'Student'
 
   const resolveHref = (href: string) => {
-    if (!preserveRole || !role) return href
-    return `${href}?role=${encodeURIComponent(role)}`
+    if (!preserveRole) return href
+    return `${href}?role=${encodeURIComponent(effectiveRole)}`
   }
 
   return (
