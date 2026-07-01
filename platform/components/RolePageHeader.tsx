@@ -31,7 +31,8 @@ export default function RolePageHeader({
 
   const resolveHref = (href: string) => {
     if (!preserveRole) return href
-    return `${href}?role=${encodeURIComponent(effectiveRole)}`
+    const separator = href.includes('?') ? '&' : '?'
+    return `${href}${separator}role=${encodeURIComponent(effectiveRole)}`
   }
 
   return (
