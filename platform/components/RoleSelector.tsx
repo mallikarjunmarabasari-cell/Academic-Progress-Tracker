@@ -8,7 +8,9 @@ export default function RoleSelector({ defaultRole }: { defaultRole?: string }) 
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const role = e.target.value
-    router.push(`/role-dashboard?role=${encodeURIComponent(role)}`)
+    const nextQuery = { ...(router.query ?? {}), role }
+
+    router.push({ pathname: router.pathname, query: nextQuery }, undefined, { shallow: true })
   }
 
   return (
