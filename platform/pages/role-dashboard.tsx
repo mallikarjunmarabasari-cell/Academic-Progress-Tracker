@@ -23,6 +23,8 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  const effectiveRole = (role as string) || 'Student'
+
   useEffect(() => {
     let mounted = true
     setIsLoading(true)
@@ -41,26 +43,24 @@ export default function Page() {
   }, [])
 
   const filtered = useMemo(() => {
-    const r = (role as string) || 'Student'
-
     if (!entries || !entries.length) return []
 
-    if (r === 'Student') {
+    if (effectiveRole === 'Student') {
       const me = session?.user?.id ?? null
       return entries.filter((e) => e.createdBy?.id === me)
     }
 
-    if (r === 'Faculty') {
+    if (effectiveRole === 'Faculty') {
       // Faculty sees departmental entries (exclude anonymous)
       return entries.filter((e) => !!e.createdBy)
     }
 
-    if (r === 'Coordinator' || r === 'HOD') {
+    if (effectiveRole === 'Coordinator' || effectiveRole === 'HOD') {
       return entries
     }
 
     return entries
-  }, [entries, role, session])
+  }, [effectiveRole, entries, session])
 
   const analytics = useMemo(() => {
     const planned = filtered.filter((entry) => entry.status === 'planned').length
@@ -84,13 +84,13 @@ export default function Page() {
             <p className="mt-1 text-sm text-slate-600">Switch context to preview user-facing KPIs and actions for each role.</p>
           </div>
           <div className="flex items-center gap-4">
-            <RoleSelector defaultRole={(role as string) ?? 'Student'} />
+            <RoleSelector defaultRole={effectiveRole} />
             <Link href={role ? `/dashboard?role=${encodeURIComponent(role)}` : '/dashboard'} className="text-sm text-slate-600 hover:underline">Return to main dashboard</Link>
           </div>
         </section>
 
         <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-          <RoleDashboard role={(role as string) ?? 'Student'} analytics={analytics} />
+          <RoleDashboard role={effectiveRole} analytics={analytics} />
           <div className="mt-4 text-sm text-slate-500">Showing {analytics.total} items (Health score: {analytics.healthScore}%)</div>
         </section>
       </div>
