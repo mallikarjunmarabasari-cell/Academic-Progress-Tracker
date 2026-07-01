@@ -33,8 +33,10 @@ export default function DashboardPage() {
   const [isSummarizing, setIsSummarizing] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  const effectiveRole = (role as string) || 'Student'
+
   const preserveRoleHref = (path: string) => {
-    return role ? `${path}?role=${encodeURIComponent(role)}` : path
+    return effectiveRole ? `${path}?role=${encodeURIComponent(effectiveRole)}` : path
   }
 
   useEffect(() => {
