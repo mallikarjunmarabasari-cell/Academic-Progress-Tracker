@@ -85,7 +85,7 @@ export default function Page() {
           </div>
           <div className="flex items-center gap-4">
             <RoleSelector defaultRole={(role as string) ?? 'Student'} />
-            <Link href="/dashboard" className="text-sm text-slate-600 hover:underline">Return to main dashboard</Link>
+            <Link href={role ? `/dashboard?role=${encodeURIComponent(role)}` : '/dashboard'} className="text-sm text-slate-600 hover:underline">Return to main dashboard</Link>
           </div>
         </section>
 

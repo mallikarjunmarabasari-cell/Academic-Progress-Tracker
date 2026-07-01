@@ -136,7 +136,7 @@ export default function DashboardPage() {
         <div className="mx-auto max-w-3xl space-y-6 rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-sm">
           <h1 className="text-3xl font-semibold text-slate-900">Progress Dashboard</h1>
           <p className="text-slate-600">Sign in to view summary analytics and your progress history.</p>
-          <Link href="/login" className="inline-flex items-center justify-center rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
+          <Link href={preserveRoleHref('/login')} className="inline-flex items-center justify-center rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
             Sign in to continue
           </Link>
         </div>

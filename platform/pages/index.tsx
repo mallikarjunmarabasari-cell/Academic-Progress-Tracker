@@ -107,7 +107,7 @@ export default function Home() {
                 </Link>
               </>
             ) : (
-              <Link href="/login" className="inline-flex items-center justify-center rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
+              <Link href={preserveRoleHref('/login')} className="inline-flex items-center justify-center rounded-full bg-slate-900 px-8 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
                 Sign in to get started
               </Link>
             )}
