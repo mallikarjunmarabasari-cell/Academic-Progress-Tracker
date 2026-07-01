@@ -5,6 +5,7 @@ const roles = ['Student', 'Faculty', 'Coordinator', 'HOD']
 
 export default function RoleSelector({ defaultRole }: { defaultRole?: string }) {
   const router = useRouter()
+  const selectedRole = defaultRole || 'Student'
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const role = e.target.value
@@ -17,7 +18,7 @@ export default function RoleSelector({ defaultRole }: { defaultRole?: string }) 
     <div className="inline-flex items-center gap-3">
       <label className="text-sm text-slate-600">View as</label>
       <select
-        value={defaultRole ?? 'Student'}
+        value={selectedRole}
         onChange={onChange}
         className="rounded-md border-slate-200 bg-white px-3 py-2 text-sm"
       >
