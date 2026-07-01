@@ -19,8 +19,10 @@ export default function Home() {
   const [isSummarizing, setIsSummarizing] = useState(false)
   const [hasProgressItems, setHasProgressItems] = useState<boolean | null>(null)
 
+  const effectiveRole = (role as string) || 'Student'
+
   const preserveRoleHref = (path: string) => {
-    return role ? `${path}?role=${encodeURIComponent(role)}` : path
+    return effectiveRole ? `${path}?role=${encodeURIComponent(effectiveRole)}` : path
   }
 
   useEffect(() => {
