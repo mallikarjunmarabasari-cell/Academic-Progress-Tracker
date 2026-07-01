@@ -9,6 +9,7 @@ import { supabase } from '@/lib/supabase';
 export default function LoginPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const role = typeof router.query.role === 'string' ? router.query.role : undefined;
 
   useEffect(() => {
     setMounted(true);
@@ -16,7 +17,8 @@ export default function LoginPage() {
     // Check if user is already logged in
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
-        router.push('/dashboard');
+        const redirectPath = role ? `/dashboard?role=${encodeURIComponent(role)}` : '/dashboard';
+        router.push(redirectPath);
       }
     });
 
@@ -25,12 +27,13 @@ export default function LoginPage() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
-        router.push('/dashboard');
+        const redirectPath = role ? `/dashboard?role=${encodeURIComponent(role)}` : '/dashboard';
+        router.push(redirectPath);
       }
     });
 
     return () => subscription?.unsubscribe();
-  }, [router]);
+  }, [router, role]);
 
   if (!mounted) {
     return null;
